@@ -89,6 +89,21 @@ func Poller(in <-chan *Resource, out chan<- *Resource, status chan<- State) {
 	}
 }
 
+func scanUrlFile(pending chan<- *Resource) {
+	file, err := os.Open("urls.txt")
+	defer file.Close()
+	if err != nil {
+		log.Fatalf("failed to open")
+	}
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+
+	for scanner.Scan() {
+		pending <- &Resource{url: scanner.Text()}
+	}
+}
+
 func main() {
 	// Create our input and output channels.
 	pending, complete := make(chan *Resource), make(chan *Resource)
@@ -102,20 +117,7 @@ func main() {
 	}
 
 	// Send some Resources to the pending queue.
-	go func() {
-		file, err := os.Open("urls.txt")
-		defer file.Close()
-		if err != nil {
-			log.Fatalf("failed to open")
-		}
-
-		scanner := bufio.NewScanner(file)
-		scanner.Split(bufio.ScanLines)
-
-		for scanner.Scan() {
-			pending <- &Resource{url: scanner.Text()}
-		}
-	}()
+	go scanUrlFile(pending)
 
 	for r := range complete {
 		go r.Sleep(pending)
