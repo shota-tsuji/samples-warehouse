@@ -90,7 +90,8 @@ func Poller(in <-chan *Resource, out chan<- *Resource, status chan<- State) {
 }
 
 func scanUrlFile(pending chan<- *Resource) {
-	file, err := os.Open("urls.txt")
+	//file, err := os.Open("urls.txt")
+	file, err := os.Open(os.Args[1])
 	defer file.Close()
 	if err != nil {
 		log.Fatalf("failed to open")
