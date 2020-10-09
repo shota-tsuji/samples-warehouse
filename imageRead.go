@@ -7,7 +7,8 @@ import (
 	"fmt"
 	"image"
 	_ "image/jpeg"
-	"io"
+	//"io"
+	"log"
 	"os"
 )
 
@@ -18,17 +19,19 @@ func main() {
 	//buf := new(bytes.Buffer)
 	//jpeg.Encode(buf, img, nil)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	src.Seek(0, io.SeekStart)
+	//src.Seek(0, io.SeekStart)
 
 	imageData, imageType, err := image.Decode(src)
 	//imageData, imageType, err := image.DecodeConfig(src)
 	//conf, encode, err := image.DecodeConfig(src)
 	//_, _, err = image.DecodeConfig(src)
 	if err != nil {
-		//panic(err)
+		log.Fatal(err)
 	}
-	fmt.Println(imageData)
+	//fmt.Println(imageData)
 	fmt.Println(imageType)
+	fmt.Println(imageData.Bounds().Min.X, imageData.Bounds().Min.Y)
+	fmt.Println(imageData.Bounds().Max.X, imageData.Bounds().Max.Y)
 }
