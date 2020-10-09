@@ -9,7 +9,7 @@ import (
 
 func main() {
 	dstImage := image.NewRGBA(image.Rect(0, 0, 895, 1200))
-	dstFile, err := os.Create("dst.jpeg")
+	dstFile, err := os.Create("dst.jpg")
 	defer dstFile.Close()
 	if err != nil {
 		log.Fatalf("create failed.")
