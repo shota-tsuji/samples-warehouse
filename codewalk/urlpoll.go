@@ -103,9 +103,6 @@ func main() {
 
 	// Send some Resources to the pending queue.
 	go func() {
-		//for _, url := range urls {
-		//	pending <- &Resource{url: url}
-		//}
 		file, err := os.Open("urls.txt")
 		defer file.Close()
 		if err != nil {
@@ -114,16 +111,10 @@ func main() {
 
 		scanner := bufio.NewScanner(file)
 		scanner.Split(bufio.ScanLines)
-		var text []string
 
 		for scanner.Scan() {
-			text = append(text, scanner.Text())
+			pending <- &Resource{url: scanner.Text()}
 		}
-
-		for _, url := range text {
-			pending <- &Resource{url: url}
-		}
-
 	}()
 
 	for r := range complete {
