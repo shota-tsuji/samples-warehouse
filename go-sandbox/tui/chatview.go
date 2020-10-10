@@ -19,7 +19,7 @@ func NewChatView() *ChatView {
 
 	// ref: https://github.com/marcusolsson/tui-go/blob/master/example/chat/main.go
 	view.history = tui.NewVBox()
-	
+
 	historyScroll := tui.NewScrollArea(view.history)
 	historyScroll.SetAutoscrollToBottom(true)
 
@@ -59,10 +59,18 @@ func (c *ChatView) OnSubmit(handler SubmitMessageHandler) {
 	c.onSubmit = handler
 }
 
-func (c *ChatView) AddMessage(user string, nsg string) {
+func (c *ChatView) AddMessage(user string, msg string) {
 	c.history.Append(
 		tui.NewHBox(
-			tui.NewLabel(fmt.Sprintf("%v: %v", user, msg))
+			tui.NewLabel(fmt.Sprintf("%v: %v", user, msg)),
 		),
 	)
 }
+
+//func (c *ChatView) AddMessage(msg string) {
+//	c.history.Append(
+//		tui.NewHBox(
+//			tui.NewLabel(msg),
+//		),
+//	)
+//}

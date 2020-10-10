@@ -35,7 +35,7 @@ func NewLoginView() *LoginView {
 	view.Append(view.frame)
 
 	user.OnSubmit(func(e *tui.Entry) {
-		if e.Text != "" {
+		if e.Text() != "" {
 			if view.loginHandler != nil {
 				view.loginHandler(e.Text())
 			}
