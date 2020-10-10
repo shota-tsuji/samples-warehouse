@@ -34,4 +34,5 @@ func main() {
 	fmt.Println(imageType)
 	fmt.Println(imageData.Bounds().Min.X, imageData.Bounds().Min.Y)
 	fmt.Println(imageData.Bounds().Max.X, imageData.Bounds().Max.Y)
+	fmt.Println(imageData.At(0, 0).RGBA())
 }
