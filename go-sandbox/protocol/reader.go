@@ -12,7 +12,7 @@ type CommandReader struct {
 
 func NewCommandReader(reader io.Reader) *CommandReader {
 	return &CommandReader{
-		reader: bufio.NewReader(reader)
+		reader: bufio.NewReader(reader),
 	}
 }
 

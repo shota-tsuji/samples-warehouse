@@ -2,8 +2,10 @@ package main
 
 import (
 	"flag"
-	"github.com/nqbao/learn-go/chatserver/client"
-	"github.com/nqbao/learn-go/chatserver/tui"
+	//"github.com/nqbao/learn-go/chatserver/client"
+	"github.com/shota-tsuji/samples-warehouse/go-sandbox/client"
+	"github.com/shota-tsuji/samples-warehouse/go-sandbox/tui"
+	//"github.com/nqbao/learn-go/chatserver/tui"
 	"log"
 )
 

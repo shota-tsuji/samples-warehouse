@@ -2,8 +2,8 @@ package tui
 
 import (
 	"github.com/marcusolsson/tui-go"
-	"github.com/nqbao/learn-go/chatserver/client"
-	//"github.com/shota/sampls-warehouse/go-sandbox/client"
+	//"github.com/nqbao/learn-go/chatserver/client"
+	"github.com/shota-tsuji/samples-warehouse/go-sandbox/client"
 )
 
 func StartUi(c client.ChatClient) {
