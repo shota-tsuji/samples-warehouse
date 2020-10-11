@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/nqbao/learn-go/chatserver/server"
+	//"github.com/nqbao/learn-go/chatserver/server"
+	"github.com/shota-tsuji/samples-warehouse/go-sandbox/server"
 )
 
 func main() {
