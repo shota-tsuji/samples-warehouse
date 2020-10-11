@@ -84,6 +84,16 @@ func (s *TcpChatServer) accept(conn net.Conn) *client {
 	return client
 }
 
+func (s *TcpChatServer) Send(name string, command interface{}) error {
+	for _, client := range s.clients {
+		if client.name == name {
+			return client.writer.Write(command)
+		}
+	}
+
+	return UnknownClient
+}
+
 func (s *TcpChatServer) serve(client *client) {
 	cmdReader := protocol.NewCommandReader(client.conn)
 	for {

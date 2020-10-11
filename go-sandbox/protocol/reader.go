@@ -24,7 +24,7 @@ func (r *CommandReader) Read() (interface{}, error) {
 	}
 
 	switch commandName {
-	case "MESSAGE":
+	case "MESSAGE ":
 		user, err := r.reader.ReadString(' ')
 		if err != nil {
 			return nil, err
@@ -39,14 +39,14 @@ func (r *CommandReader) Read() (interface{}, error) {
 			user[:len(user)-1],
 			message[:len(message)-1],
 		}, nil
-	case "SEND":
+	case "SEND ":
 		message, err := r.reader.ReadString('\n')
 		if err != nil {
 			return nil, err
 		}
 
 		return SendCommand{message[:len(message)-1]}, nil
-	case "NAME":
+	case "NAME ":
 		name, err := r.reader.ReadString('\n')
 		if err != nil {
 			return nil, err

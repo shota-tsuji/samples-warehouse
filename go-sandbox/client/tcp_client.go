@@ -3,7 +3,7 @@ package client
 import (
 	//"github.com/nqbao/learn-go/chatserver/protocol"
 	"github.com/shota-tsuji/samples-warehouse/go-sandbox/protocol"
-	"io"
+	//"io"
 	"log"
 	"net"
 )
@@ -28,9 +28,9 @@ func (c *TcpChatClient) Dial(address string) error {
 	conn, err := net.Dial("tcp", address) // connect to the server.
 	if err == nil {
 		c.conn = conn
+		c.cmdReader = protocol.NewCommandReader(conn)
+		c.cmdWriter = protocol.NewCommandWriter(conn)
 	}
-	c.cmdReader = protocol.NewCommandReader(conn)
-	c.cmdWriter = protocol.NewCommandWriter(conn)
 
 	return err
 }
@@ -38,10 +38,14 @@ func (c *TcpChatClient) Dial(address string) error {
 func (c *TcpChatClient) Start() {
 	for {
 		cmd, err := c.cmdReader.Read()
-		if err == io.EOF {
-			break
-		} else if err != nil {
-			log.Printf("Read error %v", err)
+		//if err == io.EOF {
+		//	break
+		//} else if err != nil {
+		//	log.Printf("Read error %v", err)
+		//}
+		if err != nil {
+			c.error <- err
+			break // TODO: find a way to recover from this.
 		}
 		if cmd != nil {
 			switch v := cmd.(type) {
