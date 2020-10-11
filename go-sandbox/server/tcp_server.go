@@ -2,7 +2,8 @@ package server
 
 import (
 	"errors"
-	"github.com/nqbao/learn-go/chatserver/protocol"
+	//"github.com/nqbao/learn-go/chatserver/protocol"
+	"github.com/shota-tsuji/samples-warehouse/go-sandbox/protocol"
 	"io"
 	"log"
 	"net"

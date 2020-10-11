@@ -1,7 +1,8 @@
 package client
 
 import (
-	"github.com/nqbao/learn-go/chatserver/protocol"
+	//"github.com/nqbao/learn-go/chatserver/protocol"
+	"github.com/shota-tsuji/samples-warehouse/tree/master/go-sandbox/protocol"
 	"io"
 	"log"
 	"net"
