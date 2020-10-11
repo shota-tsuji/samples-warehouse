@@ -58,6 +58,15 @@ func (s *TcpChatServer) Start() {
 	}
 }
 
+func (s *TcpChatServer) Broadcast(command interface{}) error {
+	for _, client := range s.clients {
+		// TODO: handle error here?
+		client.writer.Write(command)
+	}
+
+	return nil
+}
+
 func (s *TcpChatServer) accept(conn net.Conn) *client {
 	log.Printf("Accepting connection from %v, total clients: %v",
 		conn.RemoteAddr().String(), len(s.clients)+1)

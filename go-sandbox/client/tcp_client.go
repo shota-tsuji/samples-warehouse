@@ -12,12 +12,14 @@ type TcpChatClient struct {
 	cmdReader *protocol.CommandReader
 	cmdWriter *protocol.CommandWriter
 	name      string
+	error     chan error
 	incoming  chan protocol.MessageCommand
 }
 
 func NewClient() *TcpChatClient {
 	return &TcpChatClient{
 		incoming: make(chan protocol.MessageCommand),
+		error:    make(chan error),
 	}
 }
 
@@ -57,6 +59,10 @@ func (c *TcpChatClient) Close() {
 
 func (c *TcpChatClient) Incoming() chan protocol.MessageCommand {
 	return c.incoming
+}
+
+func (c *TcpChatClient) Error() chan error {
+	return c.error
 }
 
 // @param command: command to send to a server
